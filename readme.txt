@@ -39,6 +39,11 @@ You shouldn't need to be convinced about how awesome online event management is,
 
 But just in case you want some **advanced features**, you can grab a copy of our personal or developer support packages.
 
+[View Features & Sample Screenshots Here](http://eventespresso.com/features/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_content=View+Sample+Screens+Here&utm_campaign=ee4_decaf_plugin_screenshots_tab) OR [Compare Features](http://eventespresso.com/rich-features/compare-support-license-features/?utm_source=wordpress_org&utm_medium=link&utm_content=Compare+Features&utm_campaign=ee4_decaf_plugin_screenshots_tab)
+
+**[Buy a Premium Support License](http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_content=Buy+a+Premium+Support+License&utm_campaign=ee4_decaf_plugin_dscreenshots_tab) to get access to more features (including [Transaction Reporting](http://eventespresso.com/features/transaction-reporting/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Transaction+Reporting), [Event Check-in](http://eventespresso.com/features/event-check-list/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Event+Check-in), [Contact Profiles & Contact List](http://eventespresso.com/features/contacts/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Contact+Profiles+Contact+List), [Tax Administration](http://eventespresso.com/features/tax-administration/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Tax+Administration), etc.) and additional payment options for your WordPress events.**
+
+
 = Event Espresso Premium =
 
 * [Event Calendar](http://eventespresso.com/product/ee4-events-calendar/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_description_tab&utm_content=Event+Calendar)
@@ -56,9 +61,6 @@ Check out the advanced [installation](http://eventespresso.com/wiki/installing-e
 
 == Screenshots ==
 
-[View Features & Sample Screenshots Here](http://eventespresso.com/features/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_content=View+Sample+Screens+Here&utm_campaign=ee4_decaf_plugin_screenshots_tab) OR [Compare Features](http://eventespresso.com/rich-features/compare-support-license-features/?utm_source=wordpress_org&utm_medium=link&utm_content=Compare+Features&utm_campaign=ee4_decaf_plugin_screenshots_tab)
-
-**[Buy a Premium Support License](http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_content=Buy+a+Premium+Support+License&utm_campaign=ee4_decaf_plugin_dscreenshots_tab) to get access to more features (including [Transaction Reporting](http://eventespresso.com/features/transaction-reporting/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Transaction+Reporting), [Event Check-in](http://eventespresso.com/features/event-check-list/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Event+Check-in), [Contact Profiles & Contact List](http://eventespresso.com/features/contacts/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Contact+Profiles+Contact+List), [Tax Administration](http://eventespresso.com/features/tax-administration/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_screenshots_tab&utm_content=Tax+Administration), etc.) and additional payment options for your WordPress events.**
 
 1. Multiple Ticket and Pricing Options
 2. Customized Confirmation Emails
