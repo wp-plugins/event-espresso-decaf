@@ -39,7 +39,7 @@ You shouldn't need to be convinced about how awesome online event management is,
 
 But just in case you want some **advanced features**, you can grab a copy of our personal or developer support packages.
 
-[View Features & Sample Screenshots Here](http://eventespresso.com/features/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_content=View+Sample+Screens+Here&utm_campaign=ee4_decaf_plugin_screenshots_tab) OR [Compare Features](http://eventespresso.com/rich-features/compare-support-license-features/?utm_source=wordpress_org&utm_medium=link&utm_content=Compare+Features&utm_campaign=ee4_decaf_plugin_screenshots_tab)
+[View Features & Sample Screenshots Here](http://eventespresso.com/features/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_content=View+Sample+Screens+Here&utm_campaign=ee4_decaf_plugin_screenshots_tab) OR [Compare Features](http://eventespresso.com/differences-ee4-ee3/?utm_source=wordpress_org&utm_medium=link&utm_content=Compare+Features&utm_campaign=ee4_decaf_plugin_screenshots_tab)
 
 
 = Event Espresso Premium =
