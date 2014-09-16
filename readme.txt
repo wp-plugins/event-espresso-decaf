@@ -1,7 +1,7 @@
 === Event Espresso 4 Decaf - Event Management and Registration System ===
 Contributors: eventespresso, sethshoultes
 Donate link: http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_donate_link&utm_content=Donate+link
-Tags: booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events, event expresso, Event Expresso
+Tags: booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events, event expresso, event expresso, expresso
 Requires at least: 3.9
 Tested up to: 4.0
 Stable tag: 4.4.1.1.decaf
