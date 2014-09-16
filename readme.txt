@@ -4,7 +4,7 @@ Donate link: http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_o
 Tags: booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 4.4.1
+Stable tag: 4.4.0
 License: GPL2
 
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
