@@ -1,10 +1,10 @@
 === Event Espresso 4 Decaf - Event Management and Registration System ===
 Contributors: eventespresso, sethshoultes
 Donate link: http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_donate_link&utm_content=Donate+link
-Tags: booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events, event expresso, event expresso, expresso
+Tags: events, event, event booking, class booking, booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 4.4.1.1.decaf
+Stable tag: 4.4.4.decaf
 License: GPL2
 
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
@@ -62,7 +62,6 @@ Check out the advanced [installation](http://eventespresso.com/wiki/installing-e
 
 == Screenshots ==
 
-
 1. Multiple Ticket and Pricing Options
 2. Customized Confirmation Emails
 3. Customizable Event Designs
@@ -71,8 +70,6 @@ Check out the advanced [installation](http://eventespresso.com/wiki/installing-e
 6. Contact List
 7. In-app Documentation
 8. Customizable Country Settings
-9. Multiple Attendee Registration
-10. Accurate Attendee Manager
 
 == Installation ==
 
@@ -118,7 +115,7 @@ Backup your WordPress before installing any updates.
     Copyright 2014  Event Espresso  (email : info@eventespresso.com)
 
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
+    it under the terms of the GNU General Public License, version 2, as 
     published by the Free Software Foundation.
 
     This program is distributed in the hope that it will be useful,
