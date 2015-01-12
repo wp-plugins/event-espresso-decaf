@@ -195,7 +195,7 @@ Event registration and ticketing for WordPress with Event Espresso is very flexi
 * [Skydiving Bookings](http://eventespresso.com/use-cases/skydiving-jumping-class-reservations/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
 * Adventure Tours
 
-= Socials=
+= Socials =
 
 * Dancing
 * Speed Dating
