@@ -115,98 +115,98 @@ Event registration and ticketing for WordPress with Event Espresso is very flexi
 
 = Arts &amp; Culture =
 
-    * City Tours
-    * Club Performances
-    * Concerts
-    * Film Festivals
-    * Museum Tickets
-    * Music Festivals
-    * Movie Theater Ticket Sales
-    * Plays and Theatrical Performances
-    * Social Events
+* City Tours
+* Club Performances
+* Concerts
+* Film Festivals
+* Museum Tickets
+* Music Festivals
+* Movie Theater Ticket Sales
+* Plays and Theatrical Performances
+* Social Events
 
 = Business =
 
-    * Asset/Resource Booking/Scheduling
-    * Car Wash Sales &amp; Reservations
-    * House Cleaning Services
-    * [Model Agency Booking/Scheduling](http://eventespresso.com/use-cases/modeling-talent-agency-scheduling/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
-    * Room Booking/Scheduling
-    * Haunted House Ticket Sales
+* Asset/Resource Booking/Scheduling
+* Car Wash Sales &amp; Reservations
+* House Cleaning Services
+* [Model Agency Booking/Scheduling](http://eventespresso.com/use-cases/modeling-talent-agency-scheduling/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
+* Room Booking/Scheduling
+* Haunted House Ticket Sales
 
 = Classes =
 
-    * Art Classes
-    * Cooking Classes
-    * Dance Classes
-    * Continuing Education Classes
-    * Fitness Club Classes
-    * Martial Arts Classes
-    * Firearms and Concealed Weapons Training
-    * Music Classes
-    * Scrap booking Classes
-    * [Skydiving Classes](http://eventespresso.com/use-cases/skydiving-jumping-class-reservations/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
-    * Training Classes
-    * Yoga Classes
-    * Drivers Education
-    * Technical/IT Training
+* Art Classes
+* Cooking Classes
+* Dance Classes
+* Continuing Education Classes
+* Fitness Club Classes
+* Martial Arts Classes
+* Firearms and Concealed Weapons Training
+* Music Classes
+* Scrap booking Classes
+* [Skydiving Classes](http://eventespresso.com/use-cases/skydiving-jumping-class-reservations/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
+* Training Classes
+* Yoga Classes
+* Drivers Education
+* Technical/IT Training
 
 = Community Events</strong> <strong>Conferences =
 
-    * Group Meetings
-    * Political Conferences
-    * Social Media Conferences
-    * Tradeshow Booth Reservations/Sales
-    * WordCamps
-    * Youth Conferences/Camps
-    * Geek/IT Conferences/Camps
+* Group Meetings
+* Political Conferences
+* Social Media Conferences
+* Tradeshow Booth Reservations/Sales
+* WordCamps
+* Youth Conferences/Camps
+* Geek/IT Conferences/Camps
 
 = Education =
 
-    * Course Registrations
-    * School Lunch Reservations
-    * Parent Teacher Conferences
-    * Parent Teacher Association Conferences and Meetings
+* Course Registrations
+* School Lunch Reservations
+* Parent Teacher Conferences
+* Parent Teacher Association Conferences and Meetings
 
 = Fundraisers &amp; Non-Profit Organizations =
 
-    * Boy Scout Troop Events
-    * Donation Drives
-    * Indusry Association Events
-    * Religous Events
-    * Volunteer Management
+* Boy Scout Troop Events
+* Donation Drives
+* Indusry Association Events
+* Religous Events
+* Volunteer Management
 
 = Government =
 
-    * Chamber of Commerce
-    * Community Recreation Centers
-    * Department of Justice
+* Chamber of Commerce
+* Community Recreation Centers
+* Department of Justice
 
 = Parties =
 
-    * Birthday Parties
-    * Christmas Parties
-    * Class Reunions
-    * New-Year's Eve Parties
-    * Weddings
+* Birthday Parties
+* Christmas Parties
+* Class Reunions
+* New-Year's Eve Parties
+* Weddings
 
 = Recreation =
 
-    * [Skydiving Bookings](http://eventespresso.com/use-cases/skydiving-jumping-class-reservations/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
-    * Adventure Tours
+* [Skydiving Bookings](http://eventespresso.com/use-cases/skydiving-jumping-class-reservations/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases)
+* Adventure Tours
 
 = Socials=
 
-    * Dancing
-    * Speed Dating
+* Dancing
+* Speed Dating
 
 = Sports =
 
-    * Races
-    * Sports Arena Tickets and Season Passes
-    * Tournament Registration
-    * Football and Soccer Training
-    * Tennis Classes
+* Races
+* Sports Arena Tickets and Season Passes
+* Tournament Registration
+* Football and Soccer Training
+* Tennis Classes
 
 If you aren't quite sure if Event Espresso will work for you and it's not listed above, then [contact us](http://eventespresso.com/contact/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_more_info_use_cases_tab&utm_content=WordPress+event+manager+use_cases) and we'll do our best to evaluate your needs.
 
