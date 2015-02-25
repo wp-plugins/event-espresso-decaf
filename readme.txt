@@ -139,6 +139,8 @@ If you want to organize your event fast without the hassle of managing a server,
 
 == Changelog ==
 
+> **IMPORTANT NOTE TO EE 3.1 users and EE4.p users!  You may be getting incorrect update notifications to install this version in your WordPress Dashboard.  Please ignore that update notification and do NOT upgrade to this version.  We're currently investigating why this is happening.**
+
 = Important Note =
 
 Backup your WordPress before installing any updates. Please see our article on [Backing Up your WordPress Site](http://eventespresso.com/wiki/how-to-back-up-your-site/?utm_source=wordpress_org&utm_medium=link&utm_content=changelog&utm_campaign=ee4_decaf_plugin_changelog_tab).
