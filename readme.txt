@@ -4,12 +4,14 @@ Donate link: http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_o
 Tags: events, event, event booking, class booking, booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 4.4.10.decaf
+Stable tag: 4.5.decaf
 License: GPL2
 
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
 
 == Description ==
+
+> **IMPORTANT NOTE TO EE 3.1 users and EE4.p users!  You may be getting incorrect update notifications to install this version in your WordPress Dashboard.  Please ignore that update notification and do NOT upgrade to this version.  We're currently investigating why this is happening.**
 
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
 
@@ -136,6 +138,8 @@ We DO NOT regularly monitor the support forums on WordPress.org. You'll find a f
 If you want to organize your event fast without the hassle of managing a server, plugins and security then build your event website on our event cloud [Event Smart - free online event registration and ticketing management](https://eventsmart.com/?utm_source=wordpress_org&utm_medium=EE4_faq&utm_campaign=EE4&utm_content=link).
 
 == Changelog ==
+
+> **IMPORTANT NOTE TO EE 3.1 users and EE4.p users!  You may be getting incorrect update notifications to install this version in your WordPress Dashboard.  Please ignore that update notification and do NOT upgrade to this version.  We're currently investigating why this is happening.**
 
 = Important Note =
 
@@ -961,3 +965,4 @@ If you aren't quite sure if Event Espresso will work for you and it's not listed
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
