@@ -11,8 +11,6 @@ Manage your events from your WordPress dashboard. Reduce your admin, reduce your
 
 == Description ==
 
-> **IMPORTANT NOTE TO EE 3.1 users and EE4.p users!  You may be getting incorrect update notifications to install this version in your WordPress Dashboard.  Please ignore that update notification and do NOT upgrade to this version.  We're currently investigating why this is happening.**
-
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
 
 Event Espresso is a [WordPress event manager](http://eventespresso.com/?utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_description_tab&utm_content=WordPress+event+manager) which makes it easy for you to register attendees for classes, workshops, events, trainings, conferences or concerts, all from your WordPress website. Event Espresso events are created from the WordPress admin area. You can create signup forms to collect information about your attendees, accept payments, and create reports. The decaf version of the plugin provides everything that you need to manage your event using WordPress.
@@ -138,8 +136,6 @@ We DO NOT regularly monitor the support forums on WordPress.org. You'll find a f
 If you want to organize your event fast without the hassle of managing a server, plugins and security then build your event website on our event cloud [Event Smart - free online event registration and ticketing management](https://eventsmart.com/?utm_source=wordpress_org&utm_medium=EE4_faq&utm_campaign=EE4&utm_content=link).
 
 == Changelog ==
-
-> **IMPORTANT NOTE TO EE 3.1 users and EE4.p users!  You may be getting incorrect update notifications to install this version in your WordPress Dashboard.  Please ignore that update notification and do NOT upgrade to this version.  We're currently investigating why this is happening.**
 
 = Important Note =
 
