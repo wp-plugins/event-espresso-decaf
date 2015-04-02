@@ -3,10 +3,10 @@
   Plugin Name:		Event Espresso 4 Decaf
   Plugin URI:  		http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=ee4_decaf_plugin_admin&utm_medium=link&utm_campaign=wordpress_plugins_page&utm_content=support_link
   Description: 		Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs make your life easier! | <a href="admin.php?page=espresso_support&action=contact_support">Support</a>
-  Version: 			4.4.10.decaf
+  Version: 			4.4.10.01.decaf
 
   Author: 				Event Espresso
-  Author URI: 		http://eventespresso.com/?ee_ver=ee4&utm_source=ee4_plugin_admin&utm_medium=link&utm_campaign=wordpress_plugins_page&utm_content=support_link
+  Author URI: 		http://eventespresso.com/?ee_ver=ee4_decaf&utm_source=ee4_plugin_admin&utm_medium=link&utm_campaign=wordpress_plugins_page&utm_content=support_link
   License: 			GPLv2
   TextDomain: 		event_espresso
 
@@ -47,7 +47,7 @@ if ( ! function_exists( 'espresso_version' )) {
 	 * @return string
 	 */
 	function espresso_version() {
-		return '4.4.10.decaf';
+		return '4.4.10.01.decaf';
 	}
 } else {
 	unset( $_GET['activate'] );
