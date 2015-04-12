@@ -3,8 +3,8 @@ Contributors: eventespresso, sethshoultes
 Donate link: http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_donate_link&utm_content=Donate+link
 Tags: events, event, event booking, class booking, booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events
 Requires at least: 3.9
-Tested up to: 4.1
-Stable tag: 4.4.10.02.decaf
+Tested up to: 4.2
+Stable tag: 4.4.10.03.decaf
 License: GPL2
 
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
