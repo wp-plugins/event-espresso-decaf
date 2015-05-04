@@ -498,7 +498,7 @@ abstract class EE_Admin_Page extends EE_BASE {
 		$this->_current_page_view_url = add_query_arg( array( 'page' => $this->_current_page, 'action' => $this->_current_view ),  $this->_admin_base_url );
 
 		//default things
-		$this->_default_espresso_metaboxes = array('_espresso_news_post_box', '_espresso_links_post_box');
+		$this->_default_espresso_metaboxes = array('_espresso_news_post_box', '_espresso_links_post_box', '_espresso_ratings_request', '_espresso_sponsors_post_box' );
 
 		//set page configs
 		$this->_set_page_routes();
@@ -1913,9 +1913,39 @@ abstract class EE_Admin_Page extends EE_BASE {
 	 */
 
 	private function _espresso_news_post_box() {
-
-		add_meta_box('espresso_news_post_box', __('New @ Event Espresso', 'event_espresso'), array( $this, 'espresso_news_post_box'), $this->_wp_page_slug, 'side');
+		$news_box_title = apply_filters( 'FHEE__EE_Admin_Page___espresso_news_post_box__news_box_title', __( 'New @ Event Espresso', 'event_espresso' ) );
+		add_meta_box( 'espresso_news_post_box', $news_box_title, array(
+			$this,
+			'espresso_news_post_box'
+		), $this->_wp_page_slug, 'side' );
 	}
+
+
+	/**
+	 * Code for setting up espresso ratings request metabox.
+	 */
+	protected function _espresso_ratings_request() {
+		if ( ! apply_filters( 'FHEE_show_ratings_request_meta_box', true ) ) {
+			return '';
+		}
+		$ratings_box_title = apply_filters( 'FHEE__EE_Admin_Page___espresso_news_post_box__news_box_title', __('Keep Event Espresso Decaf Free', 'event_espresso') );
+		add_meta_box( 'espresso_ratings_request', $ratings_box_title, array(
+			$this,
+			'espresso_ratings_request'
+		), $this->_wp_page_slug, 'side' );
+	}
+
+
+	/**
+	 * Code for setting up espresso ratings request metabox content.
+	 */
+	public function espresso_ratings_request() {
+		$template_path = EE_ADMIN_TEMPLATE . 'espresso_ratings_request_content.template.php';
+		EE_Registry::instance()->load_helper( 'Template' );
+		EEH_Template::display_template( $template_path, array() );
+	}
+
+
 
 
 	public static function cached_rss_display( $rss_id, $url ) {
@@ -1974,7 +2004,7 @@ abstract class EE_Admin_Page extends EE_BASE {
 
 
 
-	private function _espresso_sponsors_post_box() {
+	protected function _espresso_sponsors_post_box() {
 
 		$show_sponsors = apply_filters( 'FHEE_show_sponsors_meta_box', TRUE );
 		if ( $show_sponsors )
@@ -1998,6 +2028,8 @@ abstract class EE_Admin_Page extends EE_BASE {
 		} else {
 			$box_label = __('Publish', 'event_espresso');
 		}
+
+		$box_label = apply_filters( 'FHEE__EE_Admin_Page___publish_post_box__box_label', $box_label, $this->_req_action, $this );
 
 		add_meta_box( $meta_box_ref, $box_label, array( $this, 'editor_overview' ), $this->_current_screen_id, 'side', 'high' );
 
@@ -2596,6 +2628,18 @@ abstract class EE_Admin_Page extends EE_BASE {
 	}
 
 
+	/**
+	 * Wrapper for the protected function.  Allows plugins/addons to call this to set the form tags.
+	 *
+	 * @see $this->_set_add_edit_form_tags() for details on params
+	 * @since 4.6.0
+	 *
+	 */
+	public function set_add_edit_form_tags( $route = '', $additional_hidden_fields = array() ) {
+		$this->_set_add_edit_form_tags( $route, $additional_hidden_fields );
+	}
+
+
 
 	/**
 	 * set form open and close tags on add/edit pages.
@@ -2777,6 +2821,12 @@ abstract class EE_Admin_Page extends EE_BASE {
 
 		if ( !isset( $this->_labels['buttons'][$type] ) )
 			throw new EE_Error( sprintf( __('There is no label for the given button type (%s). Labels are set in the <code>_page_config</code> property.', 'event_espresso'), $type) );
+
+		//finally check user access for this button.
+		$has_access = $this->_check_user_access( $action, TRUE );
+		if ( ! $has_access ) {
+			return '';
+		}
 
 		$_base_url = !$base_url ? $this->_admin_base_url : $base_url;
 
@@ -3026,6 +3076,12 @@ abstract class EE_Admin_Page extends EE_BASE {
 	}
 
 
+	/**
+	 * @return bool  value of $_is_caf property
+	 */
+	public function is_caf() {
+		return $this->_is_caf;
+	}
 
 
 	/**
@@ -3099,6 +3155,7 @@ abstract class EE_Admin_Page extends EE_BASE {
 		$this->_template_args['success'] = $success;
 		return $success;
 	}
+
 
 
 	/**

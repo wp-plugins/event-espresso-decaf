@@ -100,8 +100,6 @@ class Maintenance_Admin_Page extends EE_Admin_Page {
 					'order' => 10
 					),
 				'require_nonce' => FALSE,
-				//'metaboxes' => array( '_espresso_news_post_box', '_espresso_links_post_box', '_espresso_sponsors_post_box'),
-				////'help_tabs' => $this->_get_maintenance_help_tabs(),
 				),
 			'data_reset' => array(
 				'nav' => array(
@@ -109,8 +107,6 @@ class Maintenance_Admin_Page extends EE_Admin_Page {
 					'order' => 20
 					),
 				'require_nonce' => FALSE,
-				//'metaboxes' => array( '_espresso_news_post_box', '_espresso_links_post_box', '_espresso_sponsors_post_box'),
-				////'help_tabs' => $this->_get_maintenance_help_tabs(),
 				),
 			'system_status'=>array(
 				'nav'=>array(
@@ -118,7 +114,6 @@ class Maintenance_Admin_Page extends EE_Admin_Page {
 					'order'=>30
 				),
 				'require_nonce' => FALSE,
-				//'metaboxes'=>array( '_espresso_news_post_box', '_espresso_links_post_box', '_espresso_sponsors_post_box'),
 			)
 		);
 	}
