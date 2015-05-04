@@ -143,6 +143,9 @@ Backup your WordPress before installing any updates. Please see our article on [
 
 **Please Note:** Due to the fact that the Event Espresso 4 Decaf and Caffeinated (paid) versions share the same codebase, the changelog presented here is based on the Caffeinated (paid) version of Event Espresso 4. An up to date changelog for the current premium version [can be found here](http://eventespresso.com/wiki/ee4-changelog/?utm_source=wordpress_org&utm_medium=link&utm_content=changelog&utm_campaign=ee4_decaf_plugin_changelog_tab).
 
+= May 4, 2015 =
+Security updates (may the fourth be with you), added a positive reviews meta box, and some minor text updates.
+
 = Apr 12, 2015 =
 
 Event Espresso 4.4.10.02.decaf
