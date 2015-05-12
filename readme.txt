@@ -3,8 +3,8 @@ Contributors: eventespresso, sethshoultes
 Donate link: http://eventespresso.com/pricing/?ee_ver=ee4&utm_source=wordpress_org&utm_medium=link&utm_campaign=ee4_decaf_plugin_donate_link&utm_content=Donate+link
 Tags: events, event, event booking, class booking, booking, class registration, conference registration, event management, event manager,event registration, events calendar, events planner, event ticketing, online registration, registration, sports, ticket, ticketing, tickets, training, virtual events, wordcamp, wordpress events
 Requires at least: 3.9
-Tested up to: 4.2
-Stable tag: 4.4.10.04.decaf
+Tested up to: 4.1
+Stable tag: 4.5.decaf
 License: GPL2
 
 Manage your events from your WordPress dashboard. Reduce your admin, reduce your costs, make your life easier!
@@ -142,25 +142,6 @@ If you want to organize your event fast without the hassle of managing a server,
 Backup your WordPress before installing any updates. Please see our article on [Backing Up your WordPress Site](http://eventespresso.com/wiki/how-to-back-up-your-site/?utm_source=wordpress_org&utm_medium=link&utm_content=changelog&utm_campaign=ee4_decaf_plugin_changelog_tab).
 
 **Please Note:** Due to the fact that the Event Espresso 4 Decaf and Caffeinated (paid) versions share the same codebase, the changelog presented here is based on the Caffeinated (paid) version of Event Espresso 4. An up to date changelog for the current premium version [can be found here](http://eventespresso.com/wiki/ee4-changelog/?utm_source=wordpress_org&utm_medium=link&utm_content=changelog&utm_campaign=ee4_decaf_plugin_changelog_tab).
-
-= May 4, 2015 =
-Security updates (may the fourth be with you), added a positive reviews meta box, and some minor text updates.
-
-= Apr 12, 2015 =
-
-Event Espresso 4.4.10.02.decaf
-
-**Enhancement:**
-
-* Fix WordPress 4.2-beta4-32091 Left Menu breaks with Event Espresso
-
-= Apr 2, 2015 =
-
-Event Espresso 4.4.10.01.decaf
-
-**Enhancement:**
-
-* Make sure decaf works for WordPress 4.2
 
 = Oct 29, 2014 =
 
@@ -980,4 +961,3 @@ If you aren't quite sure if Event Espresso will work for you and it's not listed
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
