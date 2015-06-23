@@ -46,7 +46,10 @@ class EE_Primary_Registration_Details_Shortcodes extends EE_Shortcodes {
 			'[PRIMARY_REGISTRANT_CITY]' => __('The city for the primary registrant for the transaction.', 'event_espresso'),
 			'[PRIMARY_REGISTRANT_ZIP_PC]' => __('The ZIP (or Postal) Code for the primary registrant for the transaction.', 'event_espresso'),
 			'[PRIMARY_REGISTRANT_ADDRESS_STATE]' => __('The state/province for the primary registrant for the transaction.', 'event_espresso' ),
-			'[PRIMARY_REGISTRANT_COUNTRY]' => __('The country for the primary registrant for the transaction.', 'event_espresso')
+			'[PRIMARY_REGISTRANT_COUNTRY]' => __('The country for the primary registrant for the transaction.', 'event_espresso'),
+			'[PRIMARY_REGISTRANT_REGISTRATION_DATE]' => __('The date the registration occured for the primary registration.', 'event_espresso'),
+			'[PRIMARY_REGISTRANT_FRONTEND_EDIT_REG_LINK]' => __('Generates a link for the given registration to edit this registration details on the frontend.', 'event_espresso'),
+			'[PRIMARY_REGISTRANT_ANSWER_*]' => __('This is a special dynamic shortcode.  After the "*", add the exact text of an existing question, and if there is an answer for that question for this primary registrant, then it will be output in place of this shortcode.', 'event_espresso' )
 			);
 	}
 
@@ -62,8 +65,9 @@ class EE_Primary_Registration_Details_Shortcodes extends EE_Shortcodes {
 			return '';
 
 		$attendee = $primary_registration->primary_att_obj;
+		$primary_reg = $primary_registration->primary_reg_obj;
 
-		if ( ! $attendee instanceof EE_Attendee )
+		if ( ! $attendee instanceof EE_Attendee || ! $primary_reg instanceof EE_Registration )
 			return '';
 
 		switch ( $shortcode ) {
@@ -80,9 +84,7 @@ class EE_Primary_Registration_Details_Shortcodes extends EE_Shortcodes {
 				break;
 
 			case '[PRIMARY_REGISTRANT_REGISTRATION_CODE]' :
-				if ( ! $primary_registration->primary_reg_obj instanceof EE_Registration )
-					return '';
-				return $primary_registration->primary_reg_obj->reg_code();
+				return $primary_reg->reg_code();
 				break;
 
 			case '[PRIMARY_REGISTRANT_PHONE_NUMBER]' :
@@ -115,9 +117,30 @@ class EE_Primary_Registration_Details_Shortcodes extends EE_Shortcodes {
 				return $country_obj instanceof EE_Country ? $country_obj->name() : '';
 				break;
 
-			default :
-				return '';
+			case '[PRIMARY_REGISTRANT_REGISTRATION_DATE]' :
+				return date_i18n( get_option( 'date_format'), strtotime( $primary_reg->date() ) );
 				break;
+
+			case '[PRIMARY_REGISTRANT_FRONTEND_EDIT_REG_LINK]' :
+				return $primary_reg->edit_attendee_information_url();
+				break;
+		}
+
+		if ( strpos( $shortcode, '[PRIMARY_REGISTRANT_ANSWER_*' ) !== false ) {
+			$shortcode = str_replace( '[PRIMARY_REGISTRANT_ANSWER_*', '', $shortcode );
+			$shortcode = trim( str_replace( ']', '', $shortcode ) );
+
+
+			//now let's figure out what question has this text
+			if ( empty( $primary_registration->questions ) ) {
+				return '';
+			}
+
+			foreach ( $primary_registration->questions as $ansid => $question ) {
+				if ( $question->get('QST_display_text') == $shortcode && isset( $primary_registration->registrations[$primary_reg->ID()]['ans_objs'][$ansid] ) ) {
+					return $primary_registration->registrations[$primary_reg->ID()]['ans_objs'][$ansid]->get_pretty( 'ANS_value', 'no_wpautop' );
+				}
+			}
 		}
 
 		return '';

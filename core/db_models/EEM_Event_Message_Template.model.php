@@ -22,7 +22,7 @@ require_once( EE_MODELS . 'EEM_Base.model.php' );
 class EEM_Event_Message_Template extends EEM_Base {
 
 	// private instance of the EEM_Event_Message_Template object
-	private static $_instance = NULL;
+	protected static $_instance = NULL;
 
 	/**
 	 * private constructor to prevent direct creation
@@ -30,7 +30,7 @@ class EEM_Event_Message_Template extends EEM_Base {
 	 * @access private
 	 * @return void
 	 */
-	protected function __construct() {
+	protected function __construct( $timezone = NULL ) {
 		$this->singlular_item = __('Event Message Template','event_espresso');
 		$this->plural_item = __('Event Message Templates','event_espresso');
 
@@ -47,31 +47,13 @@ class EEM_Event_Message_Template extends EEM_Base {
 			'Event'=>new EE_Belongs_To_Relation(),
 			'Message_Template_Group'=>new EE_Belongs_To_Relation()
 		);
+		$this->_cap_restriction_generators[ EEM_Base::caps_read ] = new EE_Restriction_Generator_Event_Related_Public( 'Event' );
+		$this->_cap_restriction_generators[ EEM_Base::caps_read_admin ] = new EE_Restriction_Generator_Event_Related_Protected( 'Event' );
+		$this->_cap_restriction_generators[ EEM_Base::caps_edit ] = new EE_Restriction_Generator_Event_Related_Protected( 'Event' );
+		$this->_cap_restriction_generators[ EEM_Base::caps_delete ] = new EE_Restriction_Generator_Event_Related_Protected( 'Event', EEM_Base::caps_edit );
 
-		parent::__construct();
+		parent::__construct( $timezone );
 	}
-
-
-
-
-	/**
-	 * This function is a singleton method used to instantiate the EEM model object
-	 *
-	 * @access public
-	 * @return EEM_Datetime_Ticket instance
-	 */
-	public static function instance(){
-
-		// check if instance of EEM model already exists
-		if ( self::$_instance === NULL ) {
-			// instantiate EEM_Model
-			self::$_instance = new self();
-		}
-
-		// EEM_Model object
-		return self::$_instance;
-	}
-
 
 
 

@@ -31,25 +31,10 @@ require_once( EE_CLASSES . 'EE_Question_Group_Question.class.php');
 class EEM_Question_Group_Question extends EEM_Base {
 
   	// private instance of the Attendee object
-	private static $_instance = NULL;
+	protected static $_instance = NULL;
 
-	/**
-	 *		This function is a singleton method used to instantiate the EEM_Attendee object
-	 *
-	 *		@access public
-	 *		@return EEM_Question instance
-	 */	
-	public static function instance(){
-	
-		// check if instance of EEM_Attendee already exists
-		if ( self::$_instance === NULL ) {
-			// instantiate Espresso_model 
-			self::$_instance = new self();
-		}
-		// EEM_Attendee object
-		return self::$_instance;
-	}
-	protected function __construct(){
+
+	protected function __construct( $timezone = NULL ) {
 		$this->singular_item = __('Question Group to Question Link','event_espresso');
 		$this->plural_item = __('Question Group to Question Links','event_espresso');
 		$this->_tables = array(
@@ -67,7 +52,16 @@ class EEM_Question_Group_Question extends EEM_Base {
 			'Question_Group'=>new EE_Belongs_To_Relation(),
 			'Question'=>new EE_Belongs_To_Relation()
 		);
-		parent::__construct();
+
+		$this->_model_chain_to_wp_user = 'Question_Group';
+		//this model is generally available for reading
+		$this->_cap_restriction_generators[ EEM_Base::caps_read ] = new EE_Restriction_Generator_Public();
+		$this->_cap_restriction_generators[ EEM_Base::caps_read_admin ] = new EE_Restriction_Generator_Reg_Form('Question_Group.QSG_system');
+		$this->_cap_restriction_generators[ EEM_Base::caps_edit ] = new EE_Restriction_Generator_Reg_Form('Question_Group.QSG_system');
+		$this->_cap_restriction_generators[ EEM_Base::caps_delete ] = new EE_Restriction_Generator_Reg_Form('Question_Group.QSG_system');
+		//use the caps for question groups
+		$this->_caps_slug = 'question_groups';
+		parent::__construct( $timezone );
 	}
 
 

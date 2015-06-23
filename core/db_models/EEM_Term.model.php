@@ -1,19 +1,9 @@
 <?php if ( ! defined('EVENT_ESPRESSO_VERSION')) exit('No direct script access allowed');
+require_once ( EE_MODELS . 'EEM_Base.model.php' );
+
 /**
- * Event Espresso
  *
- * Event Registration and Management Plugin for WordPress
- *
- * @ package			Event Espresso
- * @ author				Seth Shoultes
- * @ copyright		(c) 2008-2011 Event Espresso  All Rights Reserved.
- * @ license			http://eventespresso.com/support/terms-conditions/   * see Plugin Licensing *
- * @ link					http://www.eventespresso.com
- * @ version		 	4.0
- *
- * ------------------------------------------------------------------------
- *
- * Attendee Model
+ * class EEM_Term
  *
  * @package			Event Espresso
  * @subpackage		includes/models/
@@ -21,36 +11,16 @@
  *
  * ------------------------------------------------------------------------
  */
-require_once ( EE_MODELS . 'EEM_Base.model.php' );
-
 class EEM_Term extends EEM_Base {
 
   	// private instance of the Attendee object
-	private static $_instance = NULL;
-
-	/**
-	 *		This function is a singleton method used to instantiate the EEM_Attendee object
-	 *
-	 *		@access public
-	 *		@return EEM_Attendee instance
-	 */
-	public static function instance(){
-
-		// check if instance of EEM_Attendee already exists
-		if ( self::$_instance === NULL ) {
-			// instantiate Espresso_model
-			self::$_instance = new self();
-		}
-		// EEM_Attendee object
-		return self::$_instance;
-	}
-
+	protected static $_instance = NULL;
 
 
 	/**
 	 *__construct
 	 */
-	protected function __construct(){
+	protected function __construct( $timezone = NULL ) {
 		$this->singular_item = __('Term','event_espresso');
 		$this->plural_item = __('Terms','event_espresso');
 		$this->_tables = array(
@@ -69,8 +39,42 @@ class EEM_Term extends EEM_Base {
 		$this->_indexes = array(
 			'slug'=>new EE_Unique_Index(array('slug'))
 		);
+		$path_to_tax_model = 'Term_Taxonomy';
+		$this->_cap_restriction_generators[ EEM_Base::caps_read ] = new EE_Restriction_Generator_Public();
+		$this->_cap_restriction_generators[ EEM_Base::caps_read_admin ] = new EE_Restriction_Generator_Taxonomy_Protected( $path_to_tax_model );
+		$this->_cap_restriction_generators[ EEM_Base::caps_edit ] = false;
+		$this->_cap_restriction_generators[ EEM_Base::caps_delete ] = false;
 
-		parent::__construct();
+		$path_to_tax_model = $path_to_tax_model . '.';
+		//add cap restrictions for editing relating to the "ee_edit_*"
+		$this->_cap_restrictions[ EEM_Base::caps_edit ]['ee_edit_event_category'] = new EE_Default_Where_Conditions(
+				array(
+					$path_to_tax_model . 'taxonomy*ee_edit_event_category' => array( '!=', 'espresso_event_categories' )
+				));
+		$this->_cap_restrictions[ EEM_Base::caps_edit ]['ee_edit_venue_category'] = new EE_Default_Where_Conditions(
+				array(
+					$path_to_tax_model . 'taxonomy*ee_edit_venue_category' => array( '!=', 'espresso_venue_categories' )
+				));
+		$this->_cap_restrictions[ EEM_Base::caps_edit ]['ee_edit_event_type'] = new EE_Default_Where_Conditions(
+				array(
+					$path_to_tax_model . 'taxonomy*ee_edit_event_type' => array( '!=', 'espresso_event_type' )
+				));
+
+		//add cap restrictions for deleting relating to the "ee_deleting_*"
+		$this->_cap_restrictions[ EEM_Base::caps_delete ]['ee_delete_event_category'] = new EE_Default_Where_Conditions(
+				array(
+					$path_to_tax_model . 'taxonomy*ee_delete_event_category' => array( '!=', 'espresso_event_categories' )
+				));
+		$this->_cap_restrictions[ EEM_Base::caps_delete ]['ee_delete_venue_category'] = new EE_Default_Where_Conditions(
+				array(
+					$path_to_tax_model . 'taxonomy*ee_delete_venue_category' => array( '!=', 'espresso_venue_categories' )
+				));
+		$this->_cap_restrictions[ EEM_Base::caps_delete ]['ee_delete_event_type'] = new EE_Default_Where_Conditions(
+				array(
+					$path_to_tax_model . 'taxonomy*ee_delete_event_type' => array( '!=', 'espresso_event_type' )
+				));
+
+		parent::__construct( $timezone );
 	}
 
 
@@ -140,7 +144,10 @@ class EEM_Term extends EEM_Base {
 			'force_join' => array( 'Term_Taxonomy.Event' )
 		));
 		foreach ( $post_tags as $key => $post_tag ) {
-			$post_tags[ $key ]->post_type = 'espresso_events';
+			if ( ! isset( $post_tags[ $key ]->post_type )) {
+				$post_tags[ $key ]->post_type = array();
+			}
+			$post_tags[ $key ]->post_type[] = 'espresso_events';
 		}
 		return $post_tags;
 //		return array( 'espresso_events' => $post_tags );
@@ -163,7 +170,10 @@ class EEM_Term extends EEM_Base {
 			'force_join' => array( 'Term_Taxonomy' )
 		));
 		foreach ( $post_tags as $key => $post_tag ) {
-			$post_tags[ $key ]->post_type = 'espresso_venues';
+			if ( ! isset( $post_tags[ $key ]->post_type )) {
+				$post_tags[ $key ]->post_type = array();
+			}
+			$post_tags[ $key ]->post_type[] = 'espresso_venues';
 		}
 		return $post_tags;
 //		return array( 'espresso_venues' => $post_tags );

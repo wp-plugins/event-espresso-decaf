@@ -79,6 +79,15 @@ class EE_Maintenance_Mode {
 		return self::$_instance;
 	}
 
+	/**
+	 * Resets maintenance mode (mostly just re-checks whether or not we should be in maintenance mode)
+	 * @return EE_Maintenance_Mode
+	 */
+	public static function reset(){
+		self::instance()->set_maintenance_mode_if_db_old();
+		return self::instance();
+	}
+
 
 
 	/**
@@ -143,6 +152,7 @@ class EE_Maintenance_Mode {
 	 * @return boolean true if DB is old and maintenance mode was triggered; false otherwise
 	 */
 	public function set_maintenance_mode_if_db_old(){
+		EE_Registry::instance()->load_core( 'Data_Migration_Manager' );
 		if( EE_Data_Migration_Manager::instance()->check_for_applicable_data_migration_scripts()){
 			update_option(self::option_name_maintenance_mode, self::level_2_complete_maintenance);
 			return true;
@@ -162,6 +172,7 @@ class EE_Maintenance_Mode {
 	 * @return void
 	 */
 	public function set_maintenance_level($level){
+		do_action( 'AHEE__EE_Maintenance_Mode__set_maintenance_level', $level );
 		update_option(self::option_name_maintenance_mode, intval($level));
 	}
 
@@ -251,10 +262,17 @@ class EE_Maintenance_Mode {
 	 */
 	public function display_maintenance_mode_notice() {
 		// check if M-mode is engaged and for EE shortcode
-		if ( $this->real_level() && current_user_can( 'administrator' ) && ! is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX )) {
+		if (
+			$this->real_level() &&
+			current_user_can( 'administrator' ) &&
+			! is_admin() &&
+			! ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+			&& EE_Registry::instance()->REQ->is_espresso_page()
+		) {
+			$admin_bar_adjustment = is_admin_bar_showing() ? ' style="top:32px;"' : '';
 			printf(
 				__( '%sclose%sEvent Registration is currently disabled because Event Espresso has been placed into Maintenance Mode. To change Maintenance Mode settings, click here %sEE Maintenance Mode Admin Page%s', 'event_espresso' ),
-				'<div id="ee-m-mode-admin-notice-dv" class=""><a class="close-espresso-notice" title="',
+				'<div id="ee-m-mode-admin-notice-dv" class="ee-really-important-notice-dv"' . $admin_bar_adjustment . '><a class="close-espresso-notice" title="',
 				'">&times;</a><p>',
 				' &raquo; <a href="' . add_query_arg( array( 'page' => 'espresso_maintenance_settings' ), admin_url( 'admin.php' )) . '">',
 				'</a></p></div>'
