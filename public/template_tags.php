@@ -570,12 +570,12 @@ if ( ! function_exists( 'espresso_event_date_range' )) {
 		$single_date_format = apply_filters( 'FHEE__espresso_event_date_range__single_date_format', $single_date_format );
 		$single_time_format = apply_filters( 'FHEE__espresso_event_date_range__single_time_format', $single_time_format );
 		EE_Registry::instance()->load_helper( 'Event_View' );
-		$the_event_date = date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
-		$the_event_end_date = date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_end_date( $date_format, $time_format, $EVT_ID )));
+		$the_event_date = date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_earliest_event_date( $date_format, $time_format, $EVT_ID )));
+		$the_event_end_date = date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_latest_event_date( $date_format, $time_format, $EVT_ID )));
 		if ( $the_event_date != $the_event_end_date ) {
-			echo $the_event_date . __( ' - ', 'event_espresso' ) . date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_end_date( $date_format, $time_format, $EVT_ID )));
+			echo $the_event_date . __( ' - ', 'event_espresso' ) . $the_event_end_date;
 		} else {
-			echo date_i18n( $single_date_format . ' ' . $single_time_format, strtotime( EEH_Event_View::the_event_date( $single_date_format, $single_time_format, $EVT_ID )));
+			echo $the_event_date;
 		}
 	}
 }
@@ -892,6 +892,23 @@ if ( ! function_exists( 'espresso_venue_id' )) {
 
 
 
+if ( ! function_exists( 'espresso_is_venue_private' ) ) {
+	/**
+	 * Return whether a venue is private or not.
+	 * @see EEH_Venue_View::get_venue() for more info on expected return results.
+	 *
+	 * @param int     $VNU_ID optional, the venue id to check.
+	 *
+	 * @return bool | null
+	 */
+	function espresso_is_venue_private( $VNU_ID = 0 ) {
+		EE_Registry::instance()->load_helper( 'Venue_View' );
+		return EEH_Venue_View::is_venue_private( $VNU_ID );
+	}
+}
+
+
+
 
 if ( ! function_exists( 'espresso_venue_name' )) {
 	/**
@@ -1118,8 +1135,9 @@ if ( ! function_exists( 'espresso_edit_venue_link' )) {
 	/**
 	 * espresso_edit_venue_link
 	 *
-	 * @param int  $VNU_ID
+	 * @param int $VNU_ID
 	 * @param bool $echo
+	 * @return string
 	 */
 	function espresso_edit_venue_link( $VNU_ID = 0, $echo = TRUE ) {
 		EE_Registry::instance()->load_helper( 'Venue_View' );

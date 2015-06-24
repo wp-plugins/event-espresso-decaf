@@ -26,26 +26,9 @@ require_once ( EE_MODELS . 'EEM_Base.model.php' );
 class EEM_Term_Relationship extends EEM_Base {
 
   	// private instance of the Attendee object
-	private static $_instance = NULL;
+	protected static $_instance = NULL;
 
-	/**
-	 *		This function is a singleton method used to instantiate the EEM_Attendee object
-	 *
-	 *		@access public
-	 *		@return EEM_Attendee instance
-	 */
-	public static function instance(){
-
-		// check if instance of EEM_Attendee already exists
-		if ( self::$_instance === NULL ) {
-			// instantiate Espresso_model
-			self::$_instance = new self();
-		}
-		// EEM_Attendee object
-		return self::$_instance;
-	}
-
-	protected function __construct(){
+	protected function __construct( $timezone = NULL ) {
 		$this->singular_item = __('Term Relationship','event_espresso');
 		$this->plural_item = __('Term Relationships','event_espresso');
 		$this->_tables = array(
@@ -66,8 +49,32 @@ class EEM_Term_Relationship extends EEM_Base {
 		$this->_indexes = array(
 			'PRIMARY'=>new EE_Primary_Key_Index(array('object_id','term_taxonomy_id'))
 		);
+		$path_to_event_model = 'Event.';
+		$this->_cap_restriction_generators[ EEM_Base::caps_read ] = new EE_Restriction_Generator_Event_Related_Public( $path_to_event_model );
+		$this->_cap_restriction_generators[ EEM_Base::caps_read_admin ] = new EE_Restriction_Generator_Event_Related_Protected( $path_to_event_model );
+		$this->_cap_restriction_generators[ EEM_Base::caps_edit ] = new EE_Restriction_Generator_Event_Related_Protected( $path_to_event_model );
+		$this->_cap_restriction_generators[ EEM_Base::caps_delete ] = new EE_Restriction_Generator_Event_Related_Protected( $path_to_event_model, EEM_Base::caps_edit );
 
-		parent::__construct();
+		$path_to_tax_model = 'Term_Taxonomy.';
+		//add cap restrictions for editing term relations to the "ee_assign_*"
+		//and for deleting term relations too
+		$cap_contexts_affected = array( EEM_Base::caps_edit, EEM_Base::caps_delete );
+		foreach( $cap_contexts_affected as $cap_context_affected ) {
+			$this->_cap_restrictions[ $cap_context_affected ]['ee_assign_event_category'] = new EE_Default_Where_Conditions(
+					array(
+						$path_to_tax_model . 'taxonomy*ee_assign_event_category' => array( '!=', 'espresso_event_categories' )
+					));
+			$this->_cap_restrictions[ $cap_context_affected ]['ee_assign_venue_category'] = new EE_Default_Where_Conditions(
+					array(
+						$path_to_tax_model . 'taxonomy*ee_assign_venue_category' => array( '!=', 'espresso_venue_categories' )
+					));
+			$this->_cap_restrictions[ $cap_context_affected ]['ee_assign_event_type'] = new EE_Default_Where_Conditions(
+					array(
+						$path_to_tax_model . 'taxonomy*ee_assign_event_type' => array( '!=', 'espresso_event_type' )
+					));
+		}
+
+		parent::__construct( $timezone );
 	}
 
 	/**
@@ -85,8 +92,8 @@ class EEM_Term_Relationship extends EEM_Base {
 		}else{
 			$second_operand = 'tr.term_taxonomy_id';
 		}
-		$rows_affected = $wpdb->query("UPDATE {$wpdb->term_taxonomy} AS tt SET count = (select count(*) as proper_count
-from {$wpdb->term_relationships} AS tr WHERE tt.term_taxonomy_id = $second_operand)");
+		$rows_affected = $this->_do_wpdb_query( 'query' , array("UPDATE {$wpdb->term_taxonomy} AS tt SET count = (select count(*) as proper_count
+from {$wpdb->term_relationships} AS tr WHERE tt.term_taxonomy_id = $second_operand)" ) );
 		return $rows_affected;
 	}
 

@@ -33,20 +33,47 @@ if (!defined('EVENT_ESPRESSO_VERSION') )
 class EE_Messages_REG_incoming_data extends EE_Messages_incoming_data {
 
 
-	//hold objects that might be created
+	/**
+	 * hold objects that might be created
+	 *
+	 * @type EE_Registration $reg_obj
+	 */
 	public $reg_obj;
 
 
+
 	/**
-	 * For the constructor of this special preview class. 
+	 * For the constructor of this special preview class.
 	 *
 	 * The data is expected to be an array that came from the $_POST and $_GET and should have at least one property from the list looked for.
-	 * 
-	 * @param EE_Registration $data
+	 *
+	 * @param EE_Registration|array $data
+	 * @throws \EE_Error
 	 */
-	public function __construct( EE_Registration $data ) {
+	public function __construct( $data ) {
+		$filtered_reg_status = null;
 
-		$this->reg_obj = $data;
+		if ( ! is_array( $data ) && $data instanceof EE_Registration ) {
+			$this->reg_obj = $data;
+		} else {
+			$this->reg_obj = is_array( $data ) && isset( $data[0] ) && $data[0] instanceof EE_Registration ? $data[0] : null;
+			$filtered_reg_status = is_array( $data ) && ! empty( $data[1] ) ? $data[1] : null;
+		}
+
+		if ( ! $this->reg_obj instanceof EE_Registration ) {
+			throw new EE_Error(
+				sprintf(
+					__( '%1$s requires the incoming data argument to be an instance of %2$s or an array where the first value is an instance of %2$s', 'event_espresso'),
+					'EE_Messages_REG_incoming_data',
+					'EE_Registration'
+				)
+			);
+		}
+
+		$data = array(
+			'reg_obj' => $this->reg_obj,
+			'filtered_reg_status' => $filtered_reg_status
+			);
 
 		parent::__construct($data);
 	}
@@ -60,20 +87,12 @@ class EE_Messages_REG_incoming_data extends EE_Messages_incoming_data {
 	protected function _setup_data() {
 
 		//now let's loop and set up the _events property.  At the same time we'll set up attendee properties.
-
-		//a variable for tracking totals
-		$running_total = 0;
-
+		$this->filtered_reg_status = $this->_data['filtered_reg_status'];
 		//get txn
 		$this->txn = $this->reg_obj->transaction();
-
-		$this->taxes = $this->txn->tax_total();
-
-		$this->grand_total_price_object = '';
-
 		//possible session stuff?
 		$session = $this->txn->session_data();
-		$session_data =  $session instanceof EE_Session ? $session->get_session_data() : array();		
+		$session_data =  $session instanceof EE_Session ? $session->get_session_data() : array();
 
 		//other data from the session (if possible)
 		$this->user_id = isset( $session_data['user_id'] ) ? $session_data['user_id'] : '';
@@ -85,14 +104,11 @@ class EE_Messages_REG_incoming_data extends EE_Messages_incoming_data {
 		$this->payment = empty( $this->payment ) ? EE_Payment::new_instance( array(
 			'STS_ID' => EEM_Payment::status_id_pending,
 			'PAY_timestamp' => (int) current_time('timestamp'),
-			'PAY_gateway' => $this->txn->selected_gateway(),
+			'PMD_ID' => $this->txn->payment_method_ID(),
 			'PAY_gateway_response' => $this->txn->gateway_response_on_transaction(),
 			)
 		 ) : $this->payment; //if there is no payments associated with the transaction then we just create a default payment object for potential parsing.
 
-		$this->billing = $this->payment->details();
-		EE_Registry::instance()->load_helper('Template');
-		$this->billing['total_due'] = isset( $this->billing['total'] ) ? EEH_Template::format_currency( $this->billing['total'] ) : '';
 
 		//get reg_objs for txn
 		$this->reg_objs = $this->txn->registrations();

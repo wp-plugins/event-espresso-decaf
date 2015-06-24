@@ -36,7 +36,7 @@ class EE_Messages_Addressee extends EE_Base {
 	 */
 	public $user_id;  //if available we'll use this to set the fname and lname (admin)
 	public $fname; //this will always be the admin fname (set later via incoming user_id)
-	public $lname; //this will always be the admin lnmae (set later via incoming user_id)
+	public $lname; //this will always be the admin lname (set later via incoming user_id)
 	public $primary_registration_id;
 	public $attendee_registration_id;
 
@@ -52,12 +52,42 @@ class EE_Messages_Addressee extends EE_Base {
 	/**
 	 * Attendee related
 	 */
-	public $primary_att_obj; //holds the attendee object for the primary attendee
-	public $primary_reg_obj; //holds the reg object for the primary attendee
-	public $att_obj; //holds the attendee object for an attendee
-	public $reg_obj; //holds the registration object for an attendee
-	public $questions; //EE_Question[] (indexed by EE_Answer->ID())
-	public $answers; //EE_Answer[]
+
+	/**
+	 * holds the attendee object for the primary attendee
+	 * @type EE_Attendee $primary_att_obj
+	 */
+	public $primary_att_obj;
+
+	/**
+	 * holds the registration object for the primary attendee
+	 * @type EE_Registration $primary_reg_obj
+	 */
+	public $primary_reg_obj;
+
+	/**
+	 * holds the attendee object for an attendee
+	 * @type EE_Attendee $att_obj
+	 */
+	public $att_obj;
+
+	/**
+	 * holds the registration object for an attendee
+	 * @type EE_Registration $reg_obj
+	 */
+	public $reg_obj;
+
+	/**
+	 * array of EE_Question objects (indexed by EE_Answer->ID())
+	 * @type EE_Question[] $questions
+	 */
+	public $questions;
+
+	/**
+	 * array of EE_Answer objects
+	 * @type EE_Answer[] $answers
+	 */
+	public $answers;
 
 
 
@@ -67,6 +97,7 @@ class EE_Messages_Addressee extends EE_Base {
 	public $events; //this will hold all event info (EE_Event[])
 	public $attendees; //holds all the attendees for an event. (EE_Attendee[])
 	public $tickets; //holds all the purchased tickets for an event (EE_Ticket[])
+	public $line_items_with_children; //holds an array of line items indexed by parent ticket line item ids and values are array of children of that line item.
 	public $datetimes; //holds all the datetimes accessed via the tickets purchased for the event (EE_Datetime[])
 	public $registrations; //holds all registrations for a transaction (with cached relations on that registration);
 
@@ -81,8 +112,12 @@ class EE_Messages_Addressee extends EE_Base {
 	 * @var float
 	 */
 	public $taxes;
+	public $tax_line_items;
+	public $additional_line_items;
+	public $grand_total_line_item;
 	public $txn;
 	public $payment;
+	public $payments;
 	public $txn_objs;
 	public $reg_objs;
 	public $total_ticket_count; //total of ALL tickets purchased for the txn.

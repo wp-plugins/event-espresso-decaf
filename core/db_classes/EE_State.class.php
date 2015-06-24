@@ -50,7 +50,7 @@ class EE_State extends EE_Base_Class {
 
 
 	/**
-	 * @return bool
+	 * @return string
 	 */
 	public function country_iso() {
 		return $this->get( 'CNT_ISO' );
@@ -59,7 +59,7 @@ class EE_State extends EE_Base_Class {
 
 
 	/**
-	 * @return bool
+	 * @return string
 	 */
 	public function abbrev() {
 		return $this->get( 'STA_abbrev' );
@@ -77,7 +77,7 @@ class EE_State extends EE_Base_Class {
 
 
 	/**
-	 * @return bool
+	 * @return string
 	 */
 	public function name() {
 		return $this->get( 'STA_name' );
@@ -86,7 +86,7 @@ class EE_State extends EE_Base_Class {
 
 
 	/**
-	 * @return EE_Base_Class
+	 * @return EE_Country
 	 */
 	public function country() {
 		return $this->get_first_related( 'Country' );

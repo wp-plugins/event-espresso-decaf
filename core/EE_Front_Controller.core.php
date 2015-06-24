@@ -89,7 +89,7 @@ final class EE_Front_Controller {
 		// process any content shortcodes
 		add_action( 'parse_request', array( $this, '_initialize_shortcodes' ), 5 );
 		// process request with module factory
-		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ), 10 );
+		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ), 10, 1 );
 		// before headers sent
 		add_action( 'wp', array( $this, 'wp' ), 5 );
 		// load css and js
@@ -101,8 +101,7 @@ final class EE_Front_Controller {
 		add_action('loop_start', array( $this, 'display_errors' ), 2 );
 		// the content
 		add_filter( 'the_content', array( $this, 'the_content' ), 5, 1 );
-		//exclude EE critical pages from wp_list_pages
-		add_filter('wp_list_pages_excludes', array( $this, 'remove_pages_from_wp_list_pages'), 10 );
+
 		//exclude our private cpt comments
 		add_filter( 'comments_clauses', array( $this, 'filter_wp_comments'), 10, 1 );
 		//make sure any ajax requests will respect the url schema when requests are made against admin-ajax.php (http:// or https://)
@@ -133,18 +132,6 @@ final class EE_Front_Controller {
 	}
 
 
-
-
-	/**
-	 * simply hooks into "wp_list_pages_exclude" filter (for wp_list_pages method) and makes sure EE critical pages are never returned with the function.
-	 *
-	 *
-	 * @param  array  $exclude_array any existing pages being excluded are in this array.
-	 * @return array
-	 */
-	public function remove_pages_from_wp_list_pages( $exclude_array ) {
-		return  array_merge( $exclude_array, EE_Registry::instance()->CFG->core->get_critical_pages_array() );
-	}
 
 
 
@@ -258,7 +245,7 @@ final class EE_Front_Controller {
 			if ( $page_on_front ) {
 				// k now we need to find the post_name for this page
 				global $wpdb;
-				$SQL = 'SELECT post_name from ' . $wpdb->posts . ' WHERE post_type="page" AND post_status="publish" AND ID=%d';
+				$SQL = "SELECT post_name from $wpdb->posts WHERE post_type='page' AND post_status='publish' AND ID=%d";
 				$page_on_front = $wpdb->get_var( $wpdb->prepare( $SQL, $page_on_front ));
 				// set the current post slug to what it actually is
 				$current_post = $page_on_front ? $page_on_front : $current_post;
@@ -289,7 +276,7 @@ final class EE_Front_Controller {
 								add_filter( 'FHEE_run_EE_the_content', '__return_true' );
 							}
 							add_shortcode( $shortcode_class, array( 'EES_Shortcode', 'invalid_shortcode_processor' ));
-							break;
+							continue;
 						}
 						// is this : a shortcodes set exclusively for this post, or for the home page, or a category, or a taxonomy ?
 						if ( isset( EE_Registry::instance()->CFG->core->post_shortcodes[ $current_post ] ) || $term_exists || $current_post == $page_for_posts ) {
@@ -300,7 +287,7 @@ final class EE_Front_Controller {
 								$msg = sprintf( __( 'The requested %s shortcode is not of the class "EES_Shortcode". Please check your files.', 'event_espresso' ), $shortcode_class );
 								EE_Error::add_error( $msg, __FILE__, __FUNCTION__, __LINE__ );
 								add_filter( 'FHEE_run_EE_the_content', '__return_true' );
-								break;
+								continue;
 							}
 							// and pass the request object to the run method
 							EE_Registry::instance()->shortcodes->$shortcode_class = $sc_reflector->newInstance();
@@ -340,7 +327,7 @@ final class EE_Front_Controller {
 				// cycle thru module routes
 				while ( $route = $Module_Request_Router->get_route( $WP_Query )) {
 					// determine module and method for route
-					$module = $Module_Request_Router->resolve_route( $route );
+					$module = $Module_Request_Router->resolve_route( $route[0], $route[1] );
 					if( $module instanceof EED_Module ) {
 						// get registered view for route
 						$this->_template_path = $Module_Request_Router->get_view( $route );
@@ -545,7 +532,14 @@ final class EE_Front_Controller {
 	public function display_errors() {
 		static $shown_already = FALSE;
 		do_action( 'AHEE__EE_Front_Controller__display_errors__begin' );
-		if ( apply_filters( 'FHEE__EE_Front_Controller__display_errors', TRUE ) && ! $shown_already && is_main_query() && ! is_feed() && in_the_loop() ) {
+		if (
+			apply_filters( 'FHEE__EE_Front_Controller__display_errors', TRUE )
+			&& ! $shown_already
+			&& is_main_query()
+			&& ! is_feed()
+			&& in_the_loop()
+			&& EE_Registry::instance()->REQ->is_espresso_page()
+		) {
 			echo EE_Error::get_notices();
 			$shown_already = TRUE;
 			EE_Registry::instance()->load_helper( 'Template' );
@@ -567,12 +561,14 @@ final class EE_Front_Controller {
 	 * @return    string
 	 */
 	public function template_include( $template_include_path = NULL ) {
-		$this->_template_path = ! empty( $this->_template_path ) ? basename( $this->_template_path ) : basename( $template_include_path );
-		$template_path = EEH_Template::locate_template( $this->_template_path, array(), FALSE );
-		$this->_template_path = ! empty( $template_path ) ? $template_path : $template_include_path;
-		$this->_template = basename( $this->_template_path );
-		//		echo '<h4>$this->_template_path : ' . $this->_template_path . '  <br /><span style="font-size:10px;font-weight:normal;">' . __FILE__ . '<br />line no: ' . __LINE__ . '</span></h4>';
-		return $this->_template_path;
+		if ( EE_Registry::instance()->REQ->is_espresso_page() ) {
+			$this->_template_path = ! empty( $this->_template_path ) ? basename( $this->_template_path ) : basename( $template_include_path );
+			$template_path = EEH_Template::locate_template( $this->_template_path, array(), false );
+			$this->_template_path = ! empty( $template_path ) ? $template_path : $template_include_path;
+			$this->_template = basename( $this->_template_path );
+			return $this->_template_path;
+		}
+		return $template_include_path;
 	}
 
 

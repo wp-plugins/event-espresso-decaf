@@ -45,7 +45,7 @@ class EED_Events_Archive  extends EED_Module {
 	 *  @return 	void
 	 */
 	public static function set_hooks() {
-		EE_Config::register_route( __( 'events', 'event_espresso' ), 'Events_Archive', 'run' );
+		EE_Config::register_route( EE_Registry::instance()->CFG->core->event_cpt_slug, 'Events_Archive', 'run' );
 		EE_Config::register_route( 'event_list', 'Events_Archive', 'event_list' );
 		add_action( 'wp_loaded', array( 'EED_Events_Archive', 'set_definitions' ), 2 );
 	}
@@ -152,6 +152,7 @@ class EED_Events_Archive  extends EED_Module {
 		// ensure valid EE_Events_Archive_Config() object exists
 //		EED_Events_Archive::_set_config();
 		// don't add content filter for dedicated EE child themes or private posts
+		EE_Registry::instance()->load_helper( 'Template' );
 		if ( ! EEH_Template::is_espresso_theme() ) {
 			// add status banner ?
 			if ( $this->config()->display_status_banner ) {

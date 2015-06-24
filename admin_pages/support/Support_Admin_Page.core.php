@@ -18,7 +18,7 @@ if (!defined('EVENT_ESPRESSO_VERSION') )
  *
  * Support_Admin_Page
  *
- * This contains the logic for setting up the Help and Support related admin pages.  Any methods without phpdoc comments have inline docs with parent class. 
+ * This contains the logic for setting up the Help and Support related admin pages.  Any methods without phpdoc comments have inline docs with parent class.
  *
  *
  * @package		Support_Admin_Page
@@ -60,10 +60,20 @@ class Support_Admin_Page extends EE_Admin_Page {
 
 	protected function _set_page_routes() {
 		$this->_page_routes = array(
-			'default' => '_shortcodes',
+			'default' => array(
+				'func' => '_shortcodes',
+				'capability' => 'ee_read_ee'
+				),
 			//'installation' => '_installation',
 			//'resources' => '_resources',
-			'contact_support' => '_contact_support'
+			'contact_support' => array(
+				'func' => '_contact_support',
+				'capability' => 'ee_read_ee'
+				),
+			'developers' => array(
+				'func' => '_developers',
+				'capability' => 'ee_read_ee'
+				),
 			);
 	}
 
@@ -83,6 +93,13 @@ class Support_Admin_Page extends EE_Admin_Page {
 					'label' => __('Support', 'event_espresso'),
 					'order' => 40),
 				'metaboxes' => array_merge( $this->_default_espresso_metaboxes, array( '_support_boxes' ) ),
+				'require_nonce' => FALSE
+				),
+			'developers' => array(
+				'nav' => array(
+					'label' => __('Developers', 'event_espresso'),
+					'order' => 50),
+				'metaboxes' => $this->_default_espresso_metaboxes,
 				'require_nonce' => FALSE
 				),
 			);
@@ -140,7 +157,7 @@ class Support_Admin_Page extends EE_Admin_Page {
 
 
 
-	
+
 	protected function _shortcodes() {
 		$this->display_admin_page_with_sidebar();
 	}
@@ -148,11 +165,12 @@ class Support_Admin_Page extends EE_Admin_Page {
 
 
 
-	protected function _shortcodes_boxes() { 
+	protected function _shortcodes_boxes() {
 	$boxes = array(
 			'shortcodes_event_listings' => __('Event Listings', 'event_espresso'),
 			'shortcodes_ticket_selector' => __('Event Ticket Selector', 'event_espresso'),
 			'shortcodes_category' => __('Event Categories', 'event_espresso'),
+			'shortcodes_attendee' => __( 'Event Attendees', 'event_espresso' )
 			/*'shortcodes_single_events' => __('Single Events', 'event_espresso'),*/
 			/*'shortcodes_attendee_listings' => __('Attendee Listings', 'event_espresso'),*/
 			);
@@ -184,6 +202,13 @@ class Support_Admin_Page extends EE_Admin_Page {
 			$callback_args = array('template_path' => $template_path, 'template_args' => $this->_template_args);
 			add_meta_box( 'espresso_' . $box . '_settings', $label, create_function('$post, $metabox', 'echo EEH_Template::display_template( $metabox["args"]["template_path"], $metabox["args"]["template_args"], TRUE );'), $this->_current_screen_id, 'normal', 'high', $callback_args);
 		}
+	}
+
+
+	protected function _developers() {
+		$template_path = EE_SUPPORT_ADMIN_TEMPLATE_PATH . 'developers_admin_details.template.php';
+		$this->_template_args['admin_page_content'] = EEH_Template::display_template($template_path, array(), true );
+		$this->display_admin_page_with_sidebar();
 	}
 
 
